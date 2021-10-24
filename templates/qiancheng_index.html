@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="referrer" content="no-referrer">
+
+  <title>前程无忧数据分析</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/assets/img/favicon.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+{#  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">#}
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+
+
+  <script src="../static/assets/js/echarts.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="/index"><span>python spider可视化分析</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="douban_index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#header">首页<i class="la la-angle-down"></i></a></li>
+          <li><a href="#">可视化分析</a></li>
+          <li><a href="#">xxx</a></li>
+          <li><a href="#">词云</a></li>
+          <li><a href="#">yyy</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <main id="main">
+
+    <!-- ======= echart ======= -->
+    <section id="chartList" class="team">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>前程无忧数据分析</h2>
+        </div>
+
+        <!-- ======= Counts Section ======= -->
+        <section class="counts section-bg">
+          <div class="container" style="margin: 0 auto" align="center">
+              <div id="echartmain1" style="width: 100%;height:600px;"></div>
+
+              <br>
+              <div id="echartmain2" style="width: 100%;height:600px;"></div>
+
+              <br>
+              <div id="echartmain3" style="width: 100%;height:600px;"></div>
+
+              <br>
+              <div id="echartmain4" style="width: 100%;height:600px;"></div>
+          </div>
+        </section><!-- End Counts Section -->
+
+      </div>
+    </section><!-- End Our Team Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Mamba</span></strong>. All Rights Reserved
+      </div>
+
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="../static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="../static/assets/vendor/venobox/venobox.min.js"></script>
+  <script src="../static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="../static/assets/vendor/counterup/counterup.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+
+  {# t1均薪资数量统计图 #}
+  <script type="text/javascript">
+        var chartDom1 = document.getElementById('echartmain1');
+        var myChart1 = echarts.init(chartDom1, 'dark');
+        var option1;
+
+        option1 = {
+            title: {
+                text: '薪资数量柱状图'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer:{
+                    type:'shadow'
+                }
+            },
+            legend: {
+                data:['可以提供该平均薪资的职位数量(单位：个)']
+            },
+            xAxis: {
+                data: {{ t1_minisalary|tojson }}
+            },
+            yAxis: {},
+            series: [{
+                name: '可以提供该平均薪资的职位数量(单位：个)',
+                type: 'bar',
+                data: {{ t1_count_minisalary }}
+            }]
+        };
+
+        option1 && myChart1.setOption(option1);
+    </script>
+
+  {# t2公司平均薪资柱状图 #}
+  <script type="text/javascript">
+            var chartDom2 = document.getElementById('echartmain2');
+            var myChart2 = echarts.init(chartDom2, 'dark');
+            var option2;
+
+            option2 = {
+                title: {
+                    text: '平均薪资柱状图'
+                },
+                grid: {
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer:{
+                        type:'shadow'
+                    }
+                },
+                legend: {
+                    data:['平均薪资(单位：万元)']
+                },
+                xAxis: {
+                    data: {{ t2_companyname|tojson }}
+                },
+                yAxis: {},
+                series: [{
+                    name: '平均薪资(单位：万元)',
+                    type: 'bar',
+                    barWidth: '30%',
+                    data: {{ t2_count_avgsalary }}
+                }]
+            };
+
+            option2 && myChart2.setOption(option2);
+  </script>
+
+  {# t3工作经验对应薪资图 #}
+  <script type="text/javascript">
+            var chartDom3 = document.getElementById('echartmain3');
+            var myChart3 = echarts.init(chartDom3, 'dark');
+            var option3;
+
+            option3 = {
+                title: {
+                    text: '工作经验对应薪资饼图',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                },
+                series: [
+                    {
+                        name: '工作经验：薪资情况',
+                        type: 'pie',
+                        radius: '80%',
+                        data: [
+                            {% for item in t3_data %}
+                            {value: {{item[0]}}, name: {{item[1]|tojson}}},
+                            {% endfor %}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            option3 && myChart3.setOption(option3);
+    </script>
+
+  {# t4学历对应薪资图 #}
+  <script type="text/javascript">
+            var chartDom4 = document.getElementById('echartmain4');
+            var myChart4 = echarts.init(chartDom4, 'dark');
+            var option4;
+
+            option4 = {
+                title: {
+                    text: '学历对应薪资饼图',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                },
+                series: [
+                    {
+                        name: '工作经验：薪资情况',
+                        type: 'pie',
+                        radius: '80%',
+                        data: [
+                            {% for item in t4_data %}
+                            {value: {{item[0]}}, name: {{item[1]|tojson}}},
+                            {% endfor %}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            option4 && myChart4.setOption(option4);
+    </script>
+
+
+
+</body>
+
+</html>
